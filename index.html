@@ -1,22 +1,65 @@
+// Initialisation Stripe avec la clé publique (met bien ta clé ici si ce n’est pas déjà fait)
+const stripe = Stripe("pk_live_..."); // ← remplace par ta clé publique réelle Stripe
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>La Cabane d’Augusta – Commande</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <img src="visuel.png" alt="Visuel Cabane" style="width:100%;max-width:600px;margin:auto;display:block;">
-    <h1>Bienvenue sur le site de commande de La Cabane d’Augusta</h1>
-    <div id="product-list"></div>
-    <div id="cart"></div>
-    <div id="time-slots">
-        <h2>Choisissez votre créneau de retrait</h2>
-        <select id="slots"></select>
-    </div>
-    <button id="checkout">Payer maintenant</button>
-    <script src="products.js"></script>
-    <script src="script.js"></script>
-</body>
-</html>
+// Fonction pour récupérer le montant total
+function getTotalAmount() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  return cart.reduce((total, item) => total + item.price, 0) * 100; // en centimes
+}
+
+// Gestion du bouton de paiement
+document.getElementById("checkout").addEventListener("click", async () => {
+  const amount = getTotalAmount();
+
+  if (amount === 0) {
+    alert("Votre panier est vide.");
+    return;
+  }
+
+  try {
+    // Appel à la Netlify Function pour créer un PaymentIntent
+    const res = await fetch("/.netlify/functions/create-payment-intent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ amount }),
+    });
+
+    const data = await res.json();
+
+    if (!data.clientSecret) {
+      throw new Error("Erreur de création du paiement.");
+    }
+
+    // Crée les éléments de carte (Stripe Elements)
+    const elements = stripe.elements();
+    const cardElement = elements.create("card");
+    cardElement.mount("#card-element");
+
+    // Affiche le formulaire si besoin
+    document.getElementById("checkout").style.display = "none";
+    const payButton = document.createElement("button");
+    payButton.textContent = "Valider le paiement";
+    payButton.id = "pay-now";
+    document.body.appendChild(payButton);
+
+    payButton.addEventListener("click", async () => {
+      const result = await stripe.confirmCardPayment(data.clientSecret, {
+        payment_method: {
+          card: cardElement,
+        },
+      });
+
+      if (result.error) {
+        alert("Erreur : " + result.error.message);
+      } else if (result.paymentIntent.status === "succeeded") {
+        alert("Paiement validé ✅ Merci !");
+        localStorage.removeItem("cart"); // Vide le panier
+        location.reload();
+      }
+    });
+
+  } catch (err) {
+    console.error(err);
+    alert("Une erreur est survenue lors du paiement.");
+  }
+});
