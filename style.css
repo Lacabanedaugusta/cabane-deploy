@@ -1,0 +1,16 @@
+
+body {
+    font-family: sans-serif;
+    padding: 20px;
+    background: #fefefe;
+}
+h1, h2 {
+    color: #074957;
+}
+#product-list, #cart {
+    margin-top: 20px;
+}
+.product {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
