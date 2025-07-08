@@ -22,7 +22,7 @@ const products = [
   },
   {
     name: "Salade Riviera",
-    description: "Riz basmati, thon, maïs, poivrons",
+    description: "Riz basmati, thon, maïs, poivrons ,oignon rouge",
     price: 9
   },
   {
@@ -37,12 +37,12 @@ const products = [
   },
   {
     name: "Wrap Saumon Avocat",
-    description: "Tortilla, saumon, avocat, salade, sauce légère",
+    description: "Tortilla, saumon, avocat, salade, oignon rouge",
     price: 10
   },
   {
     name: "Wrap Végé Mozza",
-    description: "Tortilla, mozzarella, crudités, sauce légère",
+    description: "Tortilla, mozzarella, crudités",
     price: 8.5
   },
   {
