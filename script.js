@@ -1,51 +1,66 @@
+// Initialisation Stripe avec la clé publique réelle
+const stripe = Stripe("pk_live_51RdUoRHSB5Q9b2MrTeLXUJtP3KV..."); // Remplace si besoin
 
-document.addEventListener("DOMContentLoaded", function() {
-  const list = document.getElementById("product-list");
-  const cart = document.getElementById("cart");
-  const slots = document.getElementById("slots");
-  const checkout = document.getElementById("checkout");
+// Fonction pour récupérer le montant total du panier
+function getTotalAmount() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  return cart.reduce((total, item) => total + item.price, 0) * 100; // en centimes
+}
 
-  let cartItems = [];
+// Gestion du bouton de paiement
+document.getElementById("checkout").addEventListener("click", async () => {
+  const amount = getTotalAmount();
 
-  products.forEach((p, i) => {
-    const div = document.createElement("div");
-    div.className = "product";
-    div.innerHTML = `<h2>${p.name}</h2><p>${p.description}</p><p><strong>${p.price} €</strong></p>
-    <button onclick="addToCart(${i})">Ajouter</button>`;
-    list.appendChild(div);
-  });
-
-  window.addToCart = function(index) {
-    cartItems.push(products[index]);
-    renderCart();
+  if (amount === 0) {
+    alert("Votre panier est vide.");
+    return;
   }
 
-  function renderCart() {
-    cart.innerHTML = "<h2>Panier</h2>";
-    if (cartItems.length === 0) {
-      cart.innerHTML += "<p>Votre panier est vide.</p>";
-    } else {
-      let total = 0;
-      cartItems.forEach(item => {
-        cart.innerHTML += `<p>${item.name} - ${item.price} €</p>`;
-        total += item.price;
+  try {
+    // Appel à la Netlify Function pour créer un PaymentIntent
+    const res = await fetch("/.netlify/functions/create-payment-intent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ amount }),
+    });
+
+    const data = await res.json();
+    if (!data.clientSecret) {
+      throw new Error("Erreur de création du paiement.");
+    }
+
+    // Stripe Elements pour le formulaire CB
+    const elements = stripe.elements();
+    const cardElement = elements.create("card");
+    cardElement.mount("#card-element");
+
+    // Masque le bouton de base
+    document.getElementById("checkout").style.display = "none";
+
+    // Crée le bouton "Valider le paiement"
+    const payButton = document.createElement("button");
+    payButton.textContent = "Valider le paiement";
+    payButton.id = "pay-now";
+    document.body.appendChild(payButton);
+
+    // Quand on clique, on confirme le paiement
+    payButton.addEventListener("click", async () => {
+      const result = await stripe.confirmCardPayment(data.clientSecret, {
+        payment_method: {
+          card: cardElement,
+        },
       });
-      cart.innerHTML += `<hr><strong>Total : ${total.toFixed(2)} €</strong>`;
-    }
-  }
 
-  // Créneaux horaires
-  for (let h = 10; h <= 17; h++) {
-    for (let m = 0; m < 60; m += 15) {
-      const option = document.createElement("option");
-      const hh = h.toString().padStart(2, '0');
-      const mm = m.toString().padStart(2, '0');
-      option.text = `${hh}h${mm}`;
-      slots.appendChild(option);
-    }
+      if (result.error) {
+        alert("Erreur : " + result.error.message);
+      } else if (result.paymentIntent.status === "succeeded") {
+        alert("Paiement validé ✅ Merci !");
+        localStorage.removeItem("cart");
+        location.reload();
+      }
+    });
+  } catch (err) {
+    console.error(err);
+    alert("Une erreur est survenue lors du paiement.");
   }
-
-  checkout.onclick = () => {
-    alert("Redirection vers Stripe Test...");
-  };
 });
