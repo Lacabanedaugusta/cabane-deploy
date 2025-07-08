@@ -1,75 +1,84 @@
-
 const products = [
   {
     name: "Salade Grecque",
-    description: "Iceberg, tomate cerise, concombre, oignons rouges, feta, jambon cru",
-    price: 12
+    price: 12,
+    description: "Iceberg, tomate cerise, concombre, oignons rouges, feta, jambon cru"
   },
   {
     name: "Salade Fraîcheur",
-    description: "Mélange de salade, tomate cerise, melon, mozza billes, jambon cru",
-    price: 12
+    price: 12,
+    description: "Mélange de salade, tomate cerise, melon, billes de mozzarella, jambon cru"
   },
   {
     name: "La Saumon Tzatziki",
-    description: "Iceberg, avocat, concombre, saumon, oignons rouges, sauce tzatziki",
-    price: 12
+    price: 12,
+    description: "Iceberg, avocat, concombre, saumon, oignons rouges, sauce tzatziki"
   },
   {
     name: "Salade Pasta Poulet",
-    description: "Penne, poulet, poivrons, tomate cerise, emmental râpé",
-    price: 12
+    price: 12,
+    description: "Penne, poulet, poivrons, tomate cerise, emmental râpé"
   },
   {
     name: "Salade Riviera",
-    description: "Riz basmati, thon, maïs, poivrons ,oignon rouge",
-    price: 9
+    price: 9,
+    description: "Riz basmati, thon, maïs, poivrons"
   },
   {
     name: "Salade Veggie",
-    description: "Iceberg, tomate cerise, maïs, mozza billes, avocat, concombre",
-    price: 10
+    price: 10,
+    description: "Salade, tomate cerise, concombre, avocat, mozza, maïs"
   },
   {
     name: "Wrap Poulet Cream",
-    description: "Tortilla, poulet, cream cheese, salade",
-    price: 9
+    price: 9,
+    description: "Tortilla, émincé de poulet, salade, fromage râpé, sauce cream cheese"
   },
   {
     name: "Wrap Saumon Avocat",
-    description: "Tortilla, saumon, avocat, salade, oignon rouge",
-    price: 10
+    price: 10,
+    description: "Tortilla, saumon fumé, avocat, salade, sauce légère"
   },
   {
     name: "Wrap Végé Mozza",
-    description: "Tortilla, mozzarella, crudités",
-    price: 8.5
+    price: 8.5,
+    description: "Tortilla, mozzarella, tomate, salade, sauce pesto"
   },
   {
     name: "Triangle Jambon-Fromage",
-    description: "Pain de mie, jambon, fromage",
-    price: 7
+    price: 7,
+    description: "Pain de mie, jambon, emmental, salade, beurre"
   },
   {
     name: "Triangle Poulet Crudités",
-    description: "Pain de mie, poulet, crudités",
-    price: 8
+    price: 8,
+    description: "Pain de mie, poulet, tomate, salade, mayonnaise"
   },
   {
     name: "Pan Bagnat",
-    description: "Pain rond, thon, crudités, œuf (sans ail)",
-    price: 8.5
+    price: 8.5,
+    description: "Pain rond, thon, tomate, salade, œuf, olive, poivron"
+  },
+  {
+    name: "Coca-Cola",
+    price: 3,
+    description: "Canette 33cl"
+  },
+  {
+    name: "Ice Tea Pêche",
+    price: 3,
+    description: "Canette 33cl"
+  },
+  {
+    name: "Eau plate 50cl",
+    price: 2,
+    description: "Bouteille d’eau minérale"
+  },
+  {
+    name: "Eau gazeuse 50cl",
+    price: 2.5,
+    description: "Bouteille d’eau pétillante"
   }
-,
-  { name: "Eau plate", description: "Nestlé Pure Life Bouteille 0,50 cl", price: 3 },
-  { name: "Eau gazeuse", description: "Cristalline Bouteille 0,50 cl", price: 3 },
-  { name: "Coca Cola", description: "Coca Cola Original Canette 33 cl", price: 3.5 },
-  { name: "Coca Cola Zero", description: "Coca Cola Zero Canette 33 cl", price: 3.5 },
-  { name: "Coca Cola Cherry", description: "Coca Cola Cherry Canette 33 cl", price: 3.5 },
-  { name: "Ice Tea", description: "Ice Tea Pêche Canette 33 cl", price: 3.5 },
-  { name: "Orangina", description: "Orangina à la pulpe d’orange Canette 33 cl", price: 3.5 },
-  { name: "Oasis", description: "Oasis Saveur Tropical Canette 33 cl", price: 3.5 },
-  { name: "Red Bull", description: "Red Bull Original Canette 25 cl", price: 4.5 },
-  { name: "Bière 1664", description: "Bière 1664 Canette 33 cl", price: 4 },
-  { name: "Heineken", description: "Bière Heineken Bouteille 25 cl", price: 4.5 },
-  { name: "Desperados", description: "Bière Desperados Bouteille 33 cl", price: 7 }];
+];
+
+export default products;
