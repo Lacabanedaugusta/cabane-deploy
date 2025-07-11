@@ -1,83 +1,52 @@
 const products = [
   {
+    id: 1,
     name: "Salade Grecque",
+    description: "Feta, tomate, concombre, oignon rouge, olives, origan, huile d’olive",
     price: 12,
-    description: "Iceberg, tomate cerise, concombre, oignons rouges, feta, jambon cru"
+    image: "https://via.placeholder.com/300x200?text=Salade+Grecque"
   },
   {
+    id: 2,
     name: "Salade Fraîcheur",
+    description: "Pastèque, concombre, menthe, fêta, citron vert",
     price: 12,
-    description: "Mélange de salade, tomate cerise, melon, billes de mozzarella, jambon cru"
+    image: "https://via.placeholder.com/300x200?text=Salade+Fraicheur"
   },
   {
+    id: 3,
     name: "La Saumon Tzatziki",
+    description: "Saumon fumé, tzatziki maison, crudités, aneth, citron",
     price: 12,
-    description: "Iceberg, avocat, concombre, saumon, oignons rouges, sauce tzatziki"
+    image: "https://via.placeholder.com/300x200?text=Saumon+Tzatziki"
   },
   {
-    name: "Salade Pasta Poulet",
-    price: 12,
-    description: "Penne, poulet, poivrons, tomate cerise, emmental râpé"
-  },
-  {
-    name: "Salade Riviera",
-    price: 9,
-    description: "Riz basmati, thon, maïs, poivrons"
-  },
-  {
-    name: "Salade Veggie",
-    price: 10,
-    description: "Salade, tomate cerise, concombre, avocat, mozza, maïs"
-  },
-  {
+    id: 4,
     name: "Wrap Poulet Cream",
+    description: "Poulet, crème ciboulette, salade, crudités",
     price: 9,
-    description: "Tortilla, émincé de poulet, salade, fromage râpé, sauce cream cheese"
+    image: "https://via.placeholder.com/300x200?text=Wrap+Poulet"
   },
   {
-    name: "Wrap Saumon Avocat",
-    price: 10,
-    description: "Tortilla, saumon fumé, avocat, salade, sauce légère"
-  },
-  {
-    name: "Wrap Végé Mozza",
-    price: 8.5,
-    description: "Tortilla, mozzarella, tomate, salade, sauce pesto"
-  },
-  {
+    id: 5,
     name: "Triangle Jambon-Fromage",
+    description: "Pain de mie, jambon blanc, emmental, beurre",
     price: 7,
-    description: "Pain de mie, jambon, emmental, salade, beurre"
+    image: "https://via.placeholder.com/300x200?text=Jambon+Fromage"
   },
   {
-    name: "Triangle Poulet Crudités",
-    price: 8,
-    description: "Pain de mie, poulet, tomate, salade, mayonnaise"
-  },
-  {
+    id: 6,
     name: "Pan Bagnat",
+    description: "Thon, œuf, crudités, olives, huile d’olive",
     price: 8.5,
-    description: "Pain rond, thon, tomate, salade, œuf, olive, poivron"
+    image: "https://via.placeholder.com/300x200?text=Pan+Bagnat"
   },
   {
-    name: "Coca-Cola",
+    id: 7,
+    name: "Coca-Cola 33cl",
+    description: "Boisson fraîche en canette",
     price: 3,
-    description: "Canette 33cl"
-  },
-  {
-    name: "Ice Tea Pêche",
-    price: 3,
-    description: "Canette 33cl"
-  },
-  {
-    name: "Eau plate 50cl",
-    price: 2,
-    description: "Bouteille d’eau minérale"
-  },
-  {
-    name: "Eau gazeuse 50cl",
-    price: 2.5,
-    description: "Bouteille d’eau pétillante"
+    image: "https://via.placeholder.com/300x200?text=Coca-Cola"
   }
 ];
 
